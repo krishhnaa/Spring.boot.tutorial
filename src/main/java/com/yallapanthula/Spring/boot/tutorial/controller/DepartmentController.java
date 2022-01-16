@@ -1,12 +1,14 @@
 package com.yallapanthula.Spring.boot.tutorial.controller;
 
 import com.yallapanthula.Spring.boot.tutorial.entity.Department;
+import com.yallapanthula.Spring.boot.tutorial.error.DepartmentNotFoundException;
 import com.yallapanthula.Spring.boot.tutorial.service.DepartmentService;
 import com.yallapanthula.Spring.boot.tutorial.service.DepartmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,7 +17,7 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
     @PostMapping("/departments")
-    public Department saveDepartment(@RequestBody Department department){
+    public Department saveDepartment(@Valid @RequestBody Department department){
         return departmentService.saveDepartment(department);
 
     }
@@ -24,7 +26,7 @@ public class DepartmentController {
         return departmentService.fetchDepartmentList();
     }
     @GetMapping(value = "/departments/{id}")
-    public  Department fetchDepartmentById(@PathVariable("id") Long departmentId) {
+    public  Department fetchDepartmentById(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
         return departmentService.fetchDepartmentById(departmentId);
     }
 
@@ -46,11 +48,11 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/name/{name}")
-    public Department fetchDepartmentByName(@PathVariable("name") String departmentName) {
+    public Department fetchDepartmentByName(@PathVariable("name") String departmentName) throws DepartmentNotFoundException {
         return departmentService.fetchDepartmentByName(departmentName);
     }
     @GetMapping("/departments/code/{code}")
-    public Department fetchDepartmentByCode(@PathVariable("code") String departmentCode) {
+    public Department fetchDepartmentByCode(@PathVariable("code") String departmentCode) throws DepartmentNotFoundException {
         return departmentService.fetchDepartmentByCode(departmentCode);
     }
 }
