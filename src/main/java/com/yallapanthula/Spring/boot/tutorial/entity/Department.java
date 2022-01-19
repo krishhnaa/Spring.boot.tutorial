@@ -5,11 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 
 //To interact with the database we use entity annotation
@@ -27,6 +26,8 @@ public class Department {
     private String departmentName;
     private String departmentAddress;
     private String departmentCode;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Course> courses = new ArrayList<>();
 
 
 }
