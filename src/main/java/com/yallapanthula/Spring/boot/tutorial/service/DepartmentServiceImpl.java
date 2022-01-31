@@ -1,7 +1,9 @@
 package com.yallapanthula.Spring.boot.tutorial.service;
 
+import com.yallapanthula.Spring.boot.tutorial.entity.Course;
 import com.yallapanthula.Spring.boot.tutorial.entity.Department;
 import com.yallapanthula.Spring.boot.tutorial.error.DepartmentNotFoundException;
+import com.yallapanthula.Spring.boot.tutorial.repository.CourseRepository;
 import com.yallapanthula.Spring.boot.tutorial.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ import java.util.Optional;
 public class DepartmentServiceImpl implements DepartmentService{
     @Autowired
     private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
     @Override
     public Department saveDepartment(Department department) {
         return departmentRepository.save(department);
@@ -25,6 +30,7 @@ public class DepartmentServiceImpl implements DepartmentService{
     public List<Department> fetchDepartmentList() {
         return departmentRepository.findAll();
     }
+
 
     @Override
     public Department fetchDepartmentById(Long departmentId) throws DepartmentNotFoundException {
@@ -72,5 +78,15 @@ public class DepartmentServiceImpl implements DepartmentService{
     @Override
     public void deleteDepartmentByName(String departmentName) {
         departmentRepository.deleteByDepartmentName(departmentName);
+    }
+
+    @Override
+    public List<Course> fetchCoursesList() {
+        return courseRepository.findAll();
+    }
+
+    @Override
+    public Course fetchCourseById(Long courseId) {
+        return  courseRepository.findById(courseId).get();
     }
 }

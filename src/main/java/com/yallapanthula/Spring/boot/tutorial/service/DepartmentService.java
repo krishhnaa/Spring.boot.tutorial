@@ -1,5 +1,6 @@
 package com.yallapanthula.Spring.boot.tutorial.service;
 
+import com.yallapanthula.Spring.boot.tutorial.entity.Course;
 import com.yallapanthula.Spring.boot.tutorial.entity.Department;
 import com.yallapanthula.Spring.boot.tutorial.error.DepartmentNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,8 @@ public interface DepartmentService {
 
 
     public void deleteDepartmentByName(String departmentName);
+
+    public List<Course> fetchCoursesList();
+
+    public  Course fetchCourseById(Long courseId);
 }

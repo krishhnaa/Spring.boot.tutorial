@@ -1,5 +1,6 @@
 package com.yallapanthula.Spring.boot.tutorial.controller;
 
+import com.yallapanthula.Spring.boot.tutorial.entity.Course;
 import com.yallapanthula.Spring.boot.tutorial.entity.Department;
 import com.yallapanthula.Spring.boot.tutorial.error.DepartmentNotFoundException;
 import com.yallapanthula.Spring.boot.tutorial.service.DepartmentService;
@@ -25,9 +26,21 @@ public class DepartmentController {
     public List<Department> fetchDepartmentList(){
         return departmentService.fetchDepartmentList();
     }
+
+    @GetMapping("/departments/courses")
+    public List<Course> fetchCoursesList(){
+        return departmentService.fetchCoursesList();
+    }
+
+
     @GetMapping(value = "/departments/{id}")
     public  Department fetchDepartmentById(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
         return departmentService.fetchDepartmentById(departmentId);
+    }
+
+    @GetMapping(value = "/departments/courses/{id}")
+    public  Course fetchCourseById(@PathVariable("id") Long courseId)  {
+        return departmentService.fetchCourseById(courseId);
     }
 
     @DeleteMapping(value ="/departments/{id}" )
